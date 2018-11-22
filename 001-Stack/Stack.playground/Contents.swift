@@ -17,7 +17,7 @@ struct IntStack {
 
 extension IntStack: CustomStringConvertible {
     
-    var description: String {
+    public var description: String {
         let top = "---IntStack---\n"
         let bottom = "\n--------\n"
         let elementsText = elements.reversed().map { String($0) }.joined(separator: "\n")
@@ -41,26 +41,26 @@ print(intStack)
 
 
 /// 泛型
-
 struct Stack<T> {
     fileprivate var elements: [T] = []
     
-    mutating func push(_ element: T) {
+    public mutating func push(_ element: T) {
         elements.append(element)
     }
     
-    mutating func pop() -> T? {
+    public mutating func pop() -> T? {
         return elements.popLast()
     }
     
-    func peek() -> T? {
+    /// peek() 改为使用更具有语义化的 top
+    public var top: T? {
         return elements.last
     }
 }
 
 extension Stack: CustomStringConvertible {
     
-    var description: String {
+    public var description: String {
         let top = "---Stack---\n"
         let bottom = "\n--------\n"
         let elementsText = elements.map { "\($0)" }.reversed().joined(separator: "\n")
